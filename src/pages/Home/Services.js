@@ -1,9 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ServiceCard from './ServiceCard';
 const Services = () => {
 	const [services, setServices] = useState([]);
+	console.log(services);
 	const [page, setPage] = useState(0);
 	const size = 3;
 	const [count, setCount] = useState(0);
@@ -21,7 +23,7 @@ const Services = () => {
 		const pages = Math.ceil(count / size);
 
 	return (
-		<div className=''>
+		<div className="mx-auto">
 			<div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 				{services.map((service) => (
 					<ServiceCard key={service._id} service={service}></ServiceCard>
@@ -39,6 +41,9 @@ const Services = () => {
 						</button>
 					))}
 				</div>
+				<Link to='/services'>
+					<button className="btn btn-outline btn-accent">See All</button>
+				</Link>
 			</div>
 		</div>
 	);
