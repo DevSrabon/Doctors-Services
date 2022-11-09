@@ -1,6 +1,5 @@
 [
     {
-        "_id": "635a0c0b64a6d231228942ae",
         "service_id": "04",
         "title": "Medicine",
         "name": "Prof. Dr. M.A Sattar",
@@ -14,7 +13,6 @@
         
     },
     {
-        "_id": "635a0c0b64a6d231228942af",
         "service_id": "05",
         "title": "Nephrologist",
         "name": "Prof. Dr. Pradip Kumar Dutta",
@@ -27,7 +25,6 @@
         "description": "Prof. Dr. Pradip Kumar Dutta is a Nephrologist in Chittagong. His qualification is MBBS, MD (Nephrology), FCPS (Medicine), Training (Internal Medicine). He is a Former Professor in the Department of Nephrology at Chittagong Medical College & Hospital. He regularly provides treatment to his patients at Max Hospital & Diagnostic, Chittagong. Practicing hour of Prof. Dr. Pradip Kumar Dutta at Max Hospital & Diagnostic, Chittagong is 2pm to 5pm (Monday)."
     },
     {
-        "_id": "635b591a1dafe382a9da8c96",
         "service_id": "01",
         "title": "Cardiologist",
         "name": "Dr. A.K. Boshak",
@@ -40,7 +37,6 @@
         "description": "Dr. A.K. Boshak is a Cardiologist in Chittagong. His qualification is MBBS, MD (Cardiology). He is a Associate Professor in the Department of Cardiology at Chittagong Medical College & Hospital. He regularly provides treatment to his patients at Popular Diagnostic Center, Chittagong.Practicing hour of Dr. A.K. Boshak at Popular Diagnostic Center, Chittagong is 5pm to 10pm (Closed: Friday)."
     },
     {
-        "_id": "635b5afc1dafe382a9da8c98",
         "title": "Physical Medicine",
         "name": "Dr. Md. Abu Taslim",
         "rating": "4.0",
@@ -52,7 +48,6 @@
         "description": "Dr. Md. Abu Taslim is a Physical Medicine Specialist in Chittagong. His qualification is MBBS, FCPS (Physical Medicine). He is a Associate Professor in the Department of Physical Medicine & Rehabilitation at BGC Trust Medical College, Chittagong. He regularly provides treatment to his patients at CSCR Hospital, Chittagong. Practicing hour of Dr. Md. Abu Taslim at CSCR Hospital, Chittagong is 7pm to 10pm (Closed: Friday)."
     },
     {
-        "_id": "635b5b691dafe382a9da8c99",
         "service_id": "03",
         "title": "Gynecologist",
         "name": "Prof. Dr. Shahanara Chowdhury",
@@ -65,7 +60,6 @@
         "description": "Prof. Dr. Shahanara Chowdhury is a Gynecologist in Chittagong. Her qualification is MBBS, FCPS (OBGYN), DMEd (UK). She is a Professor in the Department of Gynecology & Obstetrics at Chittagong Medical College & Hospital. She regularly provides treatment to her patients at Royal Hospital & Bellevue Chittagong. Practicing hour of Prof. Dr. Shahanara Chowdhury at Royal Hospital & Bellevue Chittagong is 4pm to 8pm (Closed: Friday)."
     },
     {
-        "_id": "635b5ba51dafe382a9da8c9a",
         "service_id": "06",
         "title": "Hematologist",
         "name": "Prof. Dr. Anupam Barua",

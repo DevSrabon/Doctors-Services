@@ -7,7 +7,6 @@ const ServiceCard = ({ service }) => {
 		img,
 		fee,
 		title,
-		rating,
 		name,
 		specialist,
 		degree,
