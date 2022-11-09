@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import 'react-photo-view/dist/react-photo-view.css';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const AllServicesCards = ({service}) => {
     const {
@@ -16,7 +18,17 @@ const AllServicesCards = ({service}) => {
     return (
 			<div class="w-full max-w-sm text-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 				<div class="flex flex-col items-center py-10">
-					<img class="mb-3 w-24 h-24 rounded-full shadow-lg" src={img} alt="" />
+					<PhotoProvider>
+						<div className="foo">
+							<PhotoView src={img}>
+								<img
+									className="mb-3 w-24 h-24 rounded-full shadow-lg"
+									src={img}
+									alt=""
+								/>
+							</PhotoView>
+						</div>
+					</PhotoProvider>
 					<h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
 						{title}
 					</h5>
