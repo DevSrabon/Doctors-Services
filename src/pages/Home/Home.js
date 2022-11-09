@@ -1,9 +1,11 @@
 import React from 'react';
+import Services from './Services';
 
 const Home = () => {
     return (
         <div>
-            <h2>this is home</h2>
+            <h2>Best Doctors in Chittagong</h2>
+            <Services></Services>
         </div>
     );
 };

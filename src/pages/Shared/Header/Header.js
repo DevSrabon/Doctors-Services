@@ -39,7 +39,6 @@ const Header = () => {
 			<div className="navbar h-20 mb-12 pt-12 bg-base-100">
 				<div className="navbar-start">
 					<div className="dropdown">
-						
 						<ul
 							tabIndex={0}
 							className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
@@ -48,14 +47,13 @@ const Header = () => {
 						</ul>
 					</div>
 					<Link to="/" className="btn btn-ghost normal-case text-xl gap-2">
-                    <img src={logo} alt="" />
-                    <div className='mr-2'>Doctor Service</div>
+						<img src={logo} alt="" />
+						<div className="mr-2 text-2xl font-bold text-orange-600">Doctor Service</div>
 					</Link>
 				</div>
 				<div className="navbar-end hidden lg:flex">
 					<ul className="menu menu-horizontal p-0">{menuItems}</ul>
 				</div>
-				
 			</div>
 		);
 };
