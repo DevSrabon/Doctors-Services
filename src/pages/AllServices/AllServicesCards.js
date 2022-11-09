@@ -16,7 +16,7 @@ const AllServicesCards = ({service}) => {
 			institute,
 		} = service;
     return (
-			<div class="w-full max-w-sm text-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+			<div class=" max-w-sm text-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-3/4 mx-auto">
 				<div class="flex flex-col items-center py-10">
 					<PhotoProvider>
 						<div className="foo">

@@ -1,0 +1,8 @@
+.banner{
+    background-image: url('../../assets/banner-img.jpg');
+    height: 90vh;
+    width: 100%;
+    filter: opacity(90%);
+    filter: brightness(80%);
+
+}

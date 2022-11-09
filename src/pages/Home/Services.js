@@ -23,7 +23,7 @@ const Services = () => {
 		const pages = Math.ceil(count / size);
 
 	return (
-		<div className="mx-auto">
+		<div className="w-3/4 mx-auto">
 			<div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 				{services.map((service) => (
 					<ServiceCard key={service._id} service={service}></ServiceCard>

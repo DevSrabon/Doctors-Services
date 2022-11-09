@@ -4,7 +4,7 @@ import logo from '../../../assets/logo.svg';
 const Footer = () => {
     return (
         
-<footer class="p-4 bg-white rounded-t-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+<footer class="p-4 bg-white  shadow md:px-6 md:py-8 dark:bg-gray-900">
     <div class="sm:flex sm:items-center sm:justify-between">
         <Link to='/' class="flex items-center mb-4 sm:mb-0">
             <img src={logo} class="mr-3 h-8" alt="Flowbite Logo"/>
