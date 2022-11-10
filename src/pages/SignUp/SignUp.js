@@ -1,55 +1,76 @@
 import React, { useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
-const Login = () => {
-	const { login } = useContext(AuthContext);
-	const location = useLocation();
-	const navigate = useNavigate();
-
-	const from = location.state?.from?.pathname || '/';
-	const handleLogin = (event) => {
+const SignUp = () => {
+	const { createUser, updateUserProfile } = useContext(AuthContext);
+	const handleSignUp = (event) => {
 		event.preventDefault();
 		const form = event.target;
+		const name = form.name.value;
 		const email = form.email.value;
+		const photoURL = form.photoURL.value;
 		const password = form.password.value;
-		console.log(email, password);
+		console.log(name, email, password);
 
-		login(email, password)
+		createUser(email, password)
 			.then((result) => {
 				const user = result.user;
-
-				const currentUser = {
-					email: user.email,
-				};
-
-				console.log(currentUser);
-
-				// get jwt token
-				// fetch('https://genius-car-server-henna-tau.vercel.app/jwt', {
-				// 	method: 'POST',
-				// 	headers: {
-				// 		'content-type': 'application/json',
-				// 	},
-				// 	body: JSON.stringify(currentUser),
-				// })
-				// 	.then((res) => res.json())
-				// 	.then((data) => {
-				// 		console.log(data);
-				// 		// local storage is the easiest but not the best place to store jwt token
-				// 		localStorage.setItem('genius-token', data.token);
-				// 		navigate(from, { replace: true });
-				// 	});
+                console.log(user);
+                form.reset();
+                handleUpdateUserProfile(name, photoURL);
 			})
-			.catch((error) => console.log(error));
-	};
+			.catch((err) => console.error(err));
 
+        const handleUpdateUserProfile = (name, photoURL) => {
+					const profile = {
+						displayName: name,
+						photoURL: photoURL,
+					};
+					updateUserProfile(profile)
+						.then(() => {})
+						.catch((error) => console.error(error));
+				};
+            
+	};
 	return (
 		<div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 w-3/4 mx-auto my-20">
-			<form className="space-y-6" onSubmit={handleLogin}>
+			<form className="space-y-6" onSubmit={handleSignUp}>
 				<h5 className="text-xl font-medium text-gray-900 dark:text-white">
 					Sign in to our platform
 				</h5>
+				<div>
+					<label
+						htmlFor="name"
+						className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+					>
+						Your name
+					</label>
+					<input
+						type="name"
+						name="name"
+						id="name"
+						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+						placeholder="elon mask"
+						required=""
+					/>
+				</div>
+				<div>
+					<label
+						htmlFor="name"
+						className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+					>
+						Photo URL
+					</label>
+					<input
+						type="photoURL"
+						name="photoURL"
+						id="photoURL"
+						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+						placeholder="Photo URL"
+						required=""
+					/>
+				</div>
 				<div>
 					<label
 						htmlFor="email"
@@ -89,12 +110,12 @@ const Login = () => {
 					Login to your account
 				</button>
 				<div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-					Not registered?{' '}
+					Already registered?{' '}
 					<Link
-						to="/signup"
+						to="/signin"
 						className="text-blue-700 hover:underline dark:text-blue-500"
 					>
-						Create account
+						sign in now!
 					</Link>
 				</div>
 			</form>
@@ -102,4 +123,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SignUp;
