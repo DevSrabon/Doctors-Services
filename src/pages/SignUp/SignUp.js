@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
-	const { createUser, updateUserProfile } = useContext(AuthContext);
+	const { createUser, updateUserProfile, signInWithGoogle } = useContext(AuthContext);
 	const handleSignUp = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -32,6 +33,11 @@ const SignUp = () => {
 						.catch((error) => console.error(error));
 				};
             
+	};
+	const handleGoogleSignIn = () => {
+		signInWithGoogle()
+			.then((result) => console.log(result.user))
+			.catch((er) => console.error(er));
 	};
 	return (
 		<div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 w-3/4 mx-auto my-20">
@@ -109,6 +115,13 @@ const SignUp = () => {
 				>
 					Login to your account
 				</button>
+
+				<div className="flex justify-center">
+					<button onClick={handleGoogleSignIn}>
+						<FaGoogle className="text-white text-3xl" />
+					</button>
+				</div>
+
 				<div className="text-sm font-medium text-gray-500 dark:text-gray-300">
 					Already registered?{' '}
 					<Link

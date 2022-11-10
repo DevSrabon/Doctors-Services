@@ -3,7 +3,6 @@ import { createContext } from 'react';
 import {
 	createUserWithEmailAndPassword,
 	getAuth,
-	GithubAuthProvider,
 	GoogleAuthProvider,
 	onAuthStateChanged,
 	signInWithEmailAndPassword,
@@ -22,6 +21,7 @@ const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const googleProvider = new GoogleAuthProvider();
+	
 	const providerLogin = (provider) => {
 		setLoading(true);
 		return signInWithPopup(auth, provider);
@@ -35,6 +35,10 @@ const AuthProvider = ({ children }) => {
 	const login = (email, password) => {
 		setLoading(true);
 		return signInWithEmailAndPassword(auth, email, password);
+	};
+
+	const signInWithGoogle = () => {
+		return signInWithPopup(auth, googleProvider);
 	};
 
 	const updateUserProfile = (profile) => {
@@ -64,7 +68,9 @@ const AuthProvider = ({ children }) => {
 		createUser,
 		login,
 		logOut,
-		updateUserProfile
+		updateUserProfile,
+		signInWithGoogle,
+		providerLogin
 	};
 
 	return (

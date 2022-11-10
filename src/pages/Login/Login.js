@@ -19,9 +19,10 @@ const Login = () => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+				alert('Succesfull Login')
 				form.reset();
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => alert(error));
 	};
 
 	return (
