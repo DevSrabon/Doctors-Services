@@ -1,4 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
+import AddDoctor from '../../AddDoctor/AddDoctor';
+import AddProduct from '../../AddDoctor/AddDoctor';
 import Main from '../../layout/Main/Main';
 import AllServices from '../../pages/AllServices/AllServices';
 import Details from '../../pages/Details/Details';
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
 			{
 				path: '/signup',
 				element: <SignUp></SignUp>
+			},
+			{
+				path: '/addservice',
+				element: <AddDoctor></AddDoctor>
 			},
 		],
 	},
