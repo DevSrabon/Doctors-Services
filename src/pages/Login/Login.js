@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
 	const { login } = useContext(AuthContext);
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const from = location.state?.from?.pathname || '/';
 	const handleLogin = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -16,6 +20,7 @@ const Login = () => {
 				console.log(user);
 				toast.success('Succesfull Login');
 				form.reset();
+				navigate(from, { replace: true });
 			})
 			.catch((err) => {
 				alert(err);

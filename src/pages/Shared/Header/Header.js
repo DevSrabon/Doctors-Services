@@ -2,11 +2,19 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import logo from '../../../assets/logo.svg';
+  import { ToastContainer, toast } from 'react-toastify';
+	import 'react-toastify/dist/ReactToastify.css';
 const Header = () => {
     	const { user, logOut } = useContext(AuthContext);
 
 			const handleLogOut = () => {
-				logOut().then().catch();
+				logOut()
+					.then(() => {
+						toast.success('Sign Out Successfully');
+					})
+					.catch((err) => {
+						alert(err);
+					});
 			};
     const menuItems = (
 		<>
@@ -75,6 +83,18 @@ const Header = () => {
 				<div className="navbar-end hidden lg:flex">
 					<ul className="menu menu-horizontal p-0">{menuItems}</ul>
 				</div>
+				<ToastContainer
+					position="top-center"
+					autoClose={1000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="light"
+				/>
 			</div>
 		);
 };
