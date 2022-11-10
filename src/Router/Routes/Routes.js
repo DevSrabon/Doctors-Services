@@ -6,7 +6,7 @@ import AllServices from '../../pages/AllServices/AllServices';
 import Details from '../../pages/Details/Details';
 import Home from '../../pages/Home/Home';
 import Login from '../../pages/Login/Login';
-import Orders from '../../pages/Orders/Orders';
+import Orders from '../../pages/Reviews/Orders';
 import SignUp from '../../pages/SignUp/SignUp';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
