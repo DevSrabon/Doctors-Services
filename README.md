@@ -6,8 +6,7 @@
 ### Server Side Code Link: https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-DevSrabon.git ###
 
 
-### Features:  
-* Features:  
+### Features:   
 * Web site has Authentication system.
 * Authorization System.
 * Complete health guide.
