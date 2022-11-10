@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const Details = ({ service }) => {
 	const { user } = useContext(AuthContext);
 	const {
+		_id,
 		img,
 		fee,
 		title,
@@ -18,7 +19,47 @@ const Details = ({ service }) => {
 	} = useLoaderData();
 	const handleComment = e => {
 		e.preventDefault();
-		console.log(e.target.comment.value);
+		 
+			const form = e.target;
+			const userName = form.name.value;
+			const email = user?.email || 'unregistered';
+			const phone = form.phone.value;
+			const date = form.date.value;
+			const message = form.comment.value;
+			const photoURL = form.photoURL.value;
+		console.log(e.target.date.value);
+
+		const order = {
+			service: _id,
+			serviceName: title,
+			name: name,
+			degree: degree,
+			fee,
+			customer: userName,
+			date,
+			email,
+			phone,
+			message,
+			photoURL
+		};
+		console.log(order.photoURL);
+
+		fetch('http://localhost:5000/orders', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(order),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.acknowledged) {
+					alert('Order placed successfully');
+					form.reset();
+				}
+			})
+			.catch((er) => console.error(er));
 	}
 	return (
 		<div className="hero min-h-screen bg-base-200">
@@ -91,15 +132,16 @@ const Details = ({ service }) => {
 								placeholder="name"
 								className="input input-bordered"
 								required
+								defaultValue={user?.displayName}
 							/>
 						</div>
 						<div className="form-control">
 							<label className="label">
-								<span className="label-text">Number</span>
+								<span className="label-text">Phone Number</span>
 							</label>
 							<input
-								type="number"
-								name="number"
+								type="text"
+								name="phone"
 								placeholder="+8801846-99999"
 								className="input input-bordered"
 								required
@@ -110,9 +152,9 @@ const Details = ({ service }) => {
 								<span className="label-text">Date</span>
 							</label>
 							<input
-								type="datetime-local"
 								className="input input-bordered"
 								required
+								type="date"
 								name="date"
 								id=""
 							/>
@@ -127,6 +169,7 @@ const Details = ({ service }) => {
 								name="photoURL"
 								className="input input-bordered"
 								required
+								defaultValue={user?.photoURL}
 							/>
 						</div>
 						<div className="form-control">
