@@ -6,7 +6,8 @@ import AllServices from '../../pages/AllServices/AllServices';
 import Details from '../../pages/Details/Details';
 import Home from '../../pages/Home/Home';
 import Login from '../../pages/Login/Login';
-import Orders from '../../pages/Reviews/Orders';
+import Reviews from '../../pages/Reviews/Reviews';
+import Orders from '../../pages/Reviews/Reviews';
 import SignUp from '../../pages/SignUp/SignUp';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
@@ -52,8 +53,12 @@ const router = createBrowserRouter([
 				element: <Blog></Blog>,
 			},
 			{
-				path: '/orders',
-				element: <Orders></Orders>,
+				path: '/reviews',
+				element: (
+					<PrivateRoute>
+						<Reviews></Reviews>
+					</PrivateRoute>
+				),
 			},
 		],
 	},

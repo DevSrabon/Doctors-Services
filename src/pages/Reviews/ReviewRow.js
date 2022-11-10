@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
-const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
+const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 	const { _id, serviceName, phone, name, customer, fee, service, date,
-			email, message, degree } = order;
-    const [orderService, setOrderService] = useState({});
+			email, message, degree } = review;
+    const [reviewService, setReviewService] = useState({});
     const { user } = useContext(AuthContext);
 	useEffect(() => {
 		fetch(`http://localhost:5000/services/${service}`)
 			.then((res) => res.json())
-			.then((data) => setOrderService(data));
+			.then((data) => setReviewService(data));
 	}, [service]);
 
 	return (
@@ -28,9 +28,9 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 				<div className="flex items-center space-x-3">
 					<div className="avatar">
 						<div className="rounded w-28 h-28">
-							{orderService?.img && (
+							{reviewService?.img && (
 								<img
-									src={orderService.img}
+									src={reviewService.img}
 									alt="Avatar Tailwind CSS Component"
 								/>
 							)}
@@ -52,8 +52,8 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 				<div className="flex items-center space-x-3">
 					<div className="avatar">
 						<div className="mask mask-circle w-16 h-16">
-							{order?.photoURL && (
-								<img src={order.photoURL} alt="Avatar Tailwind CSS Component" />
+							{review?.photoURL && (
+								<img src={review.photoURL} alt="Avatar Tailwind CSS Component" />
 							)}
 						</div>
 					</div>
@@ -87,7 +87,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 										type="text"
 										placeholder="email"
 										name="email"
-										className="input input-bordered"
+										className="input input-border"
 										required
 										defaultValue={user?.email}
 										
@@ -101,7 +101,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 										type="text"
 										name="name"
 										placeholder="name"
-										className="input input-bordered"
+										className="input input-border"
 										required
 										defaultValue={user?.displayName}
 									/>
@@ -114,7 +114,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 										type="text"
 										name="phone"
 										placeholder="+8801846-99999"
-										className="input input-bordered"
+										className="input input-border"
 										required
 									/>
 								</div>
@@ -123,7 +123,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 										<span className="label-text">Date</span>
 									</label>
 									<input
-										className="input input-bordered"
+										className="input input-border"
 										required
 										type="date"
 										name="date"
@@ -138,7 +138,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 										type="text"
 										placeholder="Photo URL"
 										name="photoURL"
-										className="input input-bordered"
+										className="input input-border"
 										required
 										defaultValue={user?.photoURL}
 									/>
@@ -170,4 +170,4 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 	);
 };
 
-export default OrderRow;
+export default ReviewRow;
