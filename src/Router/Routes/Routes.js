@@ -11,8 +11,6 @@ import Orders from '../../pages/Reviews/Reviews';
 import SignUp from '../../pages/SignUp/SignUp';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
-
-
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -30,7 +28,7 @@ const router = createBrowserRouter([
 				path: '/services/:id',
 				element: <Details></Details>,
 				loader: ({ params }) =>
-					fetch(`http://localhost:5000/services/${params.id}`),
+					fetch(`https://doc-service-server.vercel.app/services/${params.id}`),
 			},
 			{
 				path: '/login',

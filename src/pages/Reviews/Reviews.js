@@ -8,7 +8,7 @@ const Reviews = () => {
 	const [reviews, setReviews] = useState([]);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/reviews')
+		fetch('https://doc-service-server.vercel.app/reviews')
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
 	}, [user?.email]);
@@ -18,7 +18,7 @@ const Reviews = () => {
 			'Are you sure, you want to cancel this order'
 		);
 		if (proceed) {
-			fetch(`http://localhost:5000/reviews/${id}`, {
+			fetch(`https://doc-service-server.vercel.app/reviews/${id}`, {
 				method: 'DELETE',
 			})
 				.then((res) => res.json())

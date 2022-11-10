@@ -9,18 +9,18 @@ const Services = () => {
 	const [page, setPage] = useState(0);
 	const size = 3;
 	const [count, setCount] = useState(0);
-	 useEffect(() => {
-			const url = `http://localhost:5000/services?page=${page}&size=${size}`;
-			console.log(page, size);
-			fetch(url)
-				.then((res) => res.json())
-				.then((data) => {
-					setCount(data.count);
-					setServices(data.services);
-				});
-		}, [page, size]);
+	useEffect(() => {
+		const url = `https://doc-service-server.vercel.app/services?page=${page}&size=${size}`;
+		console.log(page, size);
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => {
+				setCount(data.count);
+				setServices(data.services);
+			});
+	}, [page, size]);
 
-		const pages = Math.ceil(count / size);
+	const pages = Math.ceil(count / size);
 
 	return (
 		<div className="w-3/4 mx-auto">
@@ -42,7 +42,7 @@ const Services = () => {
 					))}
 				</div>
 				<br />
-				<Link to='/services'>
+				<Link to="/services">
 					<button className="btn btn-outline btn-accent mt-5">See All</button>
 				</Link>
 			</div>

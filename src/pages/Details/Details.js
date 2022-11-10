@@ -46,7 +46,7 @@ const Details = ({ service }) => {
 		};
 		console.log(review.photoURL);
 
-		fetch('http://localhost:5000/reviews', {
+		fetch('https://doc-service-server.vercel.app/reviews', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',

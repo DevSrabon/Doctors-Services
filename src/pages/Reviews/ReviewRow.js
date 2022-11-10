@@ -2,12 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
-	const { _id, serviceName, phone, name, customer, fee, service, date,
-			email, message, degree } = review;
-    const [reviewService, setReviewService] = useState({});
-    const { user } = useContext(AuthContext);
+	const {
+		_id,
+		serviceName,
+		phone,
+		name,
+		customer,
+		fee,
+		service,
+		date,
+		email,
+		message,
+		degree,
+	} = review;
+	const [reviewService, setReviewService] = useState({});
+	const { user } = useContext(AuthContext);
 	useEffect(() => {
-		fetch(`http://localhost:5000/services/${service}`)
+		fetch(`https://doc-service-server.vercel.app/services/${service}`)
 			.then((res) => res.json())
 			.then((data) => setReviewService(data));
 	}, [service]);
@@ -53,7 +64,10 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 					<div className="avatar">
 						<div className="mask mask-circle w-16 h-16">
 							{review?.photoURL && (
-								<img src={review.photoURL} alt="Avatar Tailwind CSS Component" />
+								<img
+									src={review.photoURL}
+									alt="Avatar Tailwind CSS Component"
+								/>
 							)}
 						</div>
 					</div>
@@ -90,7 +104,6 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 										className="input input-border"
 										required
 										defaultValue={user?.email}
-										
 									/>
 								</div>
 								<div className="form-control">

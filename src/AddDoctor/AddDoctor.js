@@ -14,18 +14,18 @@ const AddDoctor = () => {
 			degree: e.target.degree.value,
 			description: e.target.description.value,
 			institute: e.target.institute.value,
-			rating: parseInt(e.target.rating.value)
+			rating: parseInt(e.target.rating.value),
 		};
-		
-		fetch('http://localhost:5000/services', {
-			method: "POST",
+
+		fetch('https://doc-service-server.vercel.app/services', {
+			method: 'POST',
 			headers: {
-				"content-type": "application/json"
+				'content-type': 'application/json',
 			},
-			body: JSON.stringify(services)
+			body: JSON.stringify(services),
 		})
-			.then(res => res.json())
-		.then(data => console.log(data))
+			.then((res) => res.json())
+			.then((data) => console.log(data));
 	};
 	return (
 		<div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 w-3/4 mx-auto my-20">
@@ -49,7 +49,7 @@ const AddDoctor = () => {
 						required
 					/>
 				</div>
-				 <div>
+				<div>
 					<label
 						htmlFor=""
 						className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
