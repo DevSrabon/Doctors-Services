@@ -1,28 +1,25 @@
 import React, { useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
 	const { login } = useContext(AuthContext);
-	const location = useLocation();
-	const navigate = useNavigate();
-
-	const from = location.state?.from?.pathname || '/';
 	const handleLogin = (event) => {
 		event.preventDefault();
 		const form = event.target;
 		const email = form.email.value;
 		const password = form.password.value;
-		console.log(email, password);
-
 		login(email, password)
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
-				alert('Succesfull Login')
+				toast.success('Succesfull Login');
 				form.reset();
 			})
-			.catch((error) => alert(error));
+			.catch((err) => {
+				alert(err);
+			});
 	};
 
 	return (
@@ -44,7 +41,7 @@ const Login = () => {
 						id="email"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 						placeholder="name@company.com"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -60,7 +57,7 @@ const Login = () => {
 						id="password"
 						placeholder="••••••••"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-						required=""
+						required
 					/>
 				</div>
 				<button
@@ -79,6 +76,18 @@ const Login = () => {
 					</Link>
 				</div>
 			</form>
+			<ToastContainer
+				position="top-center"
+				autoClose={1000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 		</div>
 	);
 };

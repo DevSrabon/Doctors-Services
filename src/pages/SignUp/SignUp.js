@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { FaGoogle } from "react-icons/fa";
-
+  import { ToastContainer, toast } from 'react-toastify';
+	import 'react-toastify/dist/ReactToastify.css';
 const SignUp = () => {
 	const { createUser, updateUserProfile, signInWithGoogle } = useContext(AuthContext);
 	const handleSignUp = (event) => {
@@ -20,8 +21,11 @@ const SignUp = () => {
                 console.log(user);
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);
+				toast.success('Successfully Sign up')
 			})
-			.catch((err) => console.error(err));
+			.catch((err) => {
+				alert(err)
+			});
 
         const handleUpdateUserProfile = (name, photoURL) => {
 					const profile = {
@@ -30,14 +34,21 @@ const SignUp = () => {
 					};
 					updateUserProfile(profile)
 						.then(() => {})
-						.catch((error) => console.error(error));
+						.catch((err) => {
+							alert(err);
+						});
 				};
             
 	};
 	const handleGoogleSignIn = () => {
 		signInWithGoogle()
-			.then((result) => console.log(result.user))
-			.catch((er) => console.error(er));
+			.then((result) => {
+				console.log(result.user);
+				toast.success('Google Sign in');
+			})
+			.catch((err) => {
+				alert(err);
+			});
 	};
 	return (
 		<div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 w-3/4 mx-auto my-20">
@@ -58,7 +69,7 @@ const SignUp = () => {
 						id="name"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 						placeholder="elon mask"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -74,7 +85,7 @@ const SignUp = () => {
 						id="photoURL"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 						placeholder="Photo URL"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -90,7 +101,7 @@ const SignUp = () => {
 						id="email"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 						placeholder="name@company.com"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -106,7 +117,7 @@ const SignUp = () => {
 						id="password"
 						placeholder="••••••••"
 						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-						required=""
+						required
 					/>
 				</div>
 				<button
@@ -132,6 +143,18 @@ const SignUp = () => {
 					</Link>
 				</div>
 			</form>
+			<ToastContainer
+				position="top-center"
+				autoClose={1000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 		</div>
 	);
 };
