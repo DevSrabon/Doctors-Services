@@ -5,7 +5,7 @@ import AllServicesCards from './AllServicesCards';
 const AllServices = () => {
 	const [services, setServices] = useState([]);
 	useEffect(() => {
-		const url = `https://doc-service-server.vercel.app/services`;
+		const url = `http://localhost:5000/services`;
 
 		fetch(url)
 			.then((res) => res.json())
@@ -24,7 +24,7 @@ const AllServices = () => {
 	return (
 		<div>
 			<div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10">
-				{services.map((service) => (
+				{services?.map((service) => (
 					<AllServicesCards
 						key={service._id}
 						service={service}

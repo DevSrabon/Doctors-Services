@@ -1,31 +1,32 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import ReviewRow from './ReviewRow';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Reviews = () => {
 	const { user } = useContext(AuthContext);
 	const [reviews, setReviews] = useState([]);
+	const [refetch, setRefetch] = useState(false)
 
 	useEffect(() => {
-		fetch('https://doc-service-server.vercel.app/reviews')
+		fetch(`http://localhost:5000/reviews?email=${user?.email}`)
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
-	}, [user?.email]);
+	}, [user?.email, refetch]);
 
 	const handleDelete = (id) => {
 		const proceed = window.confirm(
-			'Are you sure, you want to cancel this order'
+			"Are you sure, you want to cancel?"
 		);
 		if (proceed) {
-			fetch(`https://doc-service-server.vercel.app/reviews/${id}`, {
-				method: 'DELETE',
+			fetch(`http://localhost:5000/reviews/${id}`, {
+				method: "DELETE",
 			})
 				.then((res) => res.json())
 				.then((data) => {
 					console.log(data);
 					if (data.deletedCount > 0) {
-						toast.success('Deleted successfully');
+						toast.success("Deleted successfully");
 						const remaining = reviews.filter((rev) => rev._id !== id);
 						setReviews(remaining);
 					}
@@ -41,38 +42,27 @@ const Reviews = () => {
 			<div className="overflow-x-auto w-full">
 				<table className="table w-full">
 					<thead>
-						<tr>
-							<th></th>
+						<tr className="text-center">
+							<th> Delete</th>
 							<th>Name</th>
 							<th>Job</th>
 							<th>Review</th>
-							<th>Customer</th>
-							<th></th>
+							<th>Rating</th>
+							<th>Customer Info</th>
+							<th>Edit</th>
 						</tr>
 					</thead>
 					<tbody>
-						{reviews.map((review) => (
+						{reviews?.map((review) => (
 							<ReviewRow
 								key={review._id}
 								review={review}
 								handleDelete={handleDelete}
-							></ReviewRow>
+								setRefetch={setRefetch}></ReviewRow>
 						))}
 					</tbody>
 				</table>
 			</div>
-			<ToastContainer
-				position="top-center"
-				autoClose={1000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
 		</div>
 	);
 };

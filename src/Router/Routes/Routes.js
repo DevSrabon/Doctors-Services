@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import AddDoctor from '../../AddDoctor/AddDoctor';
+import AddDoctor from '../../pages/AddDoctor/AddDoctor';
 import Blog from '../../Blog/Blog';
 import Main from '../../layout/Main/Main';
 import AllServices from '../../pages/AllServices/AllServices';
@@ -13,33 +13,33 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: "/",
 		element: <Main></Main>,
 		children: [
 			{
-				path: '/',
+				path: "/",
 				element: <Home></Home>,
 			},
 			{
-				path: '/services',
+				path: "/services",
 				element: <AllServices></AllServices>,
 			},
 			{
-				path: '/services/:id',
+				path: "/services/:id",
 				element: <Details></Details>,
 				loader: ({ params }) =>
-					fetch(`https://doc-service-server.vercel.app/services/${params.id}`),
+					fetch(`http://localhost:5000/services/${params.id}`),
 			},
 			{
-				path: '/login',
+				path: "/login",
 				element: <Login></Login>,
 			},
 			{
-				path: '/signup',
+				path: "/signup",
 				element: <SignUp></SignUp>,
 			},
 			{
-				path: '/addservice',
+				path: "/addservice",
 				element: (
 					<PrivateRoute>
 						<AddDoctor></AddDoctor>
@@ -47,11 +47,11 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: '/blog',
+				path: "/blog",
 				element: <Blog></Blog>,
 			},
 			{
-				path: '/reviews',
+				path: "/reviews",
 				element: (
 					<PrivateRoute>
 						<Reviews></Reviews>

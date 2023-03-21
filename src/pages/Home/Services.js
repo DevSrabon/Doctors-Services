@@ -10,7 +10,7 @@ const Services = () => {
 	const size = 3;
 	const [count, setCount] = useState(0);
 	useEffect(() => {
-		const url = `https://doc-service-server.vercel.app/services?page=${page}&size=${size}`;
+		const url = `http://localhost:5000/services?page=${page}&size=${size}`;
 		console.log(page, size);
 		fetch(url)
 			.then((res) => res.json())
@@ -25,13 +25,13 @@ const Services = () => {
 	return (
 		<div className="w-3/4 mx-auto">
 			<div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-				{services.map((service) => (
+				{services?.map((service) => (
 					<ServiceCard key={service._id} service={service}></ServiceCard>
 				))}
 			</div>
 			<div className="text-center my-5">
 				<div className="btn-group">
-					{[...Array(pages).keys()].map((number) => (
+					{[...Array(pages).keys()]?.map((number) => (
 						<button
 							key={number}
 							className={page === number ? 'btn btn-active' : 'btn'}

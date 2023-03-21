@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import React, { useState } from 'react';
+import StarRatings from 'react-star-ratings';
+import { toast } from 'react-toastify';
 
-const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
+const ReviewRow = ({ review, handleDelete, setRefetch }) => {
 	const {
 		_id,
 		serviceName,
@@ -9,28 +10,52 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 		name,
 		customer,
 		fee,
-		service,
+		img,
 		date,
 		email,
 		message,
+		myRating,
 		degree,
+		reviewLength
 	} = review;
-	const [reviewService, setReviewService] = useState({});
-	const { user } = useContext(AuthContext);
-	useEffect(() => {
-		fetch(`https://doc-service-server.vercel.app/services/${service}`)
+	const [updateRating, setUpdateRating] = useState(review.myRating);
+	console.log(
+		"🚀 ~ file: ReviewRow.js:21 ~ ReviewRow ~ updateRating:",
+		updateRating
+	);
+	const changeRating = (newRating) => {
+		setUpdateRating(newRating);
+	};
+	const handleStatusUpdate = (e) => {
+		e.preventDefault();
+		const form = e.target;
+		const message = form.comment.value;
+		const body = {
+			myRating: updateRating,
+			message: message,
+			reviewLength: reviewLength? reviewLength : 0,
+		};
+		fetch(`http://localhost:5000/updatereview/${_id}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(body),
+		})
 			.then((res) => res.json())
-			.then((data) => setReviewService(data));
-	}, [service]);
-
+			.then((data) => {
+				if (data) {
+					setRefetch(true)
+					toast.success("updated Successfully ✅")
+			}});
+	};
 	return (
 		<tr>
 			<th>
 				<label>
 					<button
 						onClick={() => handleDelete(_id)}
-						className="btn btn-square btn-outline"
-					>
+						className="btn btn-square btn-outline">
 						X
 					</button>
 				</label>
@@ -39,17 +64,14 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 				<div className="flex items-center space-x-3">
 					<div className="avatar">
 						<div className="rounded w-28 h-28">
-							{reviewService?.img && (
-								<img
-									src={reviewService.img}
-									alt="Avatar Tailwind CSS Component"
-								/>
-							)}
+							{img && <img src={img} alt="Avatar Tailwind CSS Component" />}
 						</div>
 					</div>
-					<div>
+					<div className="max-w-2">
 						<div className="font-bold">{name}</div>
-						<div className="text-sm opacity-50 w-2">{degree}</div>
+						<div className="text-sm opacity-50 ">
+							{degree.length > 30 ? degree.slice(0, 30) : degree}
+						</div>
 					</div>
 				</div>
 			</td>
@@ -58,7 +80,15 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 				<br />
 				<span className="badge badge-ghost badge-sm">${fee}</span>
 			</td>
-			<td>{message}</td>
+			<td>{message?.length > 30 ? message.slice(0, 30) : message}</td>
+			<td className="font-semibold ">
+				<StarRatings
+					rating={myRating}
+					starDimension="25px"
+					starSpacing="5px"
+					starRatedColor="orange"
+				/>
+			</td>
 			<td>
 				<div className="flex items-center space-x-3">
 					<div className="avatar">
@@ -89,73 +119,19 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 				<div className="modal">
 					<div className="modal-box">
 						<div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
-							<form className="card-body">
+							<form onSubmit={handleStatusUpdate} className="card-body">
 								<h5 className="text-2xl font-bold text-gray-900 dark:text-gray-900">
 									Review Our Service
 								</h5>
-								<div className="form-control">
-									<label className="label">
-										<span className="label-text">Email</span>
-									</label>
-									<input
-										type="text"
-										placeholder="email"
-										name="email"
-										className="input input-border"
-										required
-										defaultValue={user?.email}
-									/>
-								</div>
-								<div className="form-control">
-									<label className="label">
-										<span className="label-text">Name</span>
-									</label>
-									<input
-										type="text"
-										name="name"
-										placeholder="name"
-										className="input input-border"
-										required
-										defaultValue={user?.displayName}
-									/>
-								</div>
-								<div className="form-control">
-									<label className="label">
-										<span className="label-text">Phone Number</span>
-									</label>
-									<input
-										type="text"
-										name="phone"
-										placeholder="+8801846-99999"
-										className="input input-border"
-										required
-									/>
-								</div>
-								<div className="form-control">
-									<label className="label">
-										<span className="label-text">Date</span>
-									</label>
-									<input
-										className="input input-border"
-										required
-										type="date"
-										name="date"
-										id=""
-									/>
-								</div>
-								<div className="form-control">
-									<label className="label">
-										<span className="label-text">Photo URL</span>
-									</label>
-									<input
-										type="text"
-										placeholder="Photo URL"
-										name="photoURL"
-										className="input input-border"
-										required
-										defaultValue={user?.photoURL}
-									/>
-								</div>
+
+								<StarRatings
+									rating={updateRating}
+									starDimension="25px"
+									starSpacing="5px"
+									starRatedColor="orange"
+									changeRating={changeRating}
+								/>
+
 								<div className="form-control">
 									<label className="label">
 										<span className="label-text">Comment</span>
@@ -163,17 +139,20 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
 									<textarea
 										className="textarea textarea-error"
 										placeholder="Comment"
-										name="comment"
-									></textarea>
+										name="comment"></textarea>
 								</div>
 								<div className="form-control mt-6">
-									<button className="btn btn-primary">Comment</button>
+									<button type="submit" className="btn btn-primary">
+										Comment
+									</button>
 								</div>
 							</form>
 						</div>
 						<div className="modal-action">
-							<label htmlFor="my-modal" className="btn">
-								Done
+							<label
+								htmlFor="my-modal"
+								className="btn btn-sm btn-circle absolute right-2 top-2">
+								✕
 							</label>
 						</div>
 					</div>

@@ -6,6 +6,18 @@ import { FaGoogle } from "react-icons/fa";
 	import 'react-toastify/dist/ReactToastify.css';
 const SignUp = () => {
 	const { createUser, updateUserProfile, signInWithGoogle } = useContext(AuthContext);
+		const saveUser = (name, email) => {
+			const user = { name, email };
+			fetch(`http://localhost:5000/users`, {
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify(user),
+			})
+				.then((res) => res.json())
+				.then((data) => {});
+		};
 	const handleSignUp = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -16,7 +28,8 @@ const SignUp = () => {
 		createUser(email, password)
 			.then((result) => {
 				const user = result.user;
-                console.log(user);
+				console.log(user);
+				saveUser(user?.displayName, user?.email)
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);
 				toast.success('Successfully Sign up')
@@ -37,16 +50,6 @@ const SignUp = () => {
 						});
 				};
             
-	};
-	const handleGoogleSignIn = () => {
-		signInWithGoogle()
-			.then((result) => {
-				console.log(result.user);
-				toast.success('Google Sign in');
-			})
-			.catch((err) => {
-				alert(err);
-			});
 	};
 	return (
 		<div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 w-3/4 mx-auto my-20">
@@ -125,12 +128,6 @@ const SignUp = () => {
 					Login to your account
 				</button>
 
-				<div className="flex justify-center">
-					<button onClick={handleGoogleSignIn}>
-						<FaGoogle className="text-white text-3xl" />
-					</button>
-				</div>
-
 				<div className="text-sm font-medium text-gray-500 dark:text-gray-300">
 					Already registered?{' '}
 					<Link
@@ -141,18 +138,6 @@ const SignUp = () => {
 					</Link>
 				</div>
 			</form>
-			<ToastContainer
-				position="top-center"
-				autoClose={1000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
 		</div>
 	);
 };
