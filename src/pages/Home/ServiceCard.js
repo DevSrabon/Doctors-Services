@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'react-photo-view/dist/react-photo-view.css';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import StarRatings from 'react-star-ratings';
 const ServiceCard = ({ service }) => {
 	const {
 		_id,
@@ -12,7 +13,9 @@ const ServiceCard = ({ service }) => {
 		specialist,
 		degree,
 		description,
+		myRating,
 		institute,
+		reviewLength,
 	} = service;
 	return (
 		<div className="w-full max-w-sm text-center bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -46,7 +49,7 @@ const ServiceCard = ({ service }) => {
 				<span className="text-sm pb-3 px-5 text-justify text-gray-500 dark:text-gray-400">
 					{description.length > 100 ? (
 						<>
-							{description.slice(0, 100) + '...'}
+							{description.slice(0, 100) + "..."}
 							<Link to={`/services/${_id}`}>See More</Link>
 						</>
 					) : (
@@ -56,11 +59,21 @@ const ServiceCard = ({ service }) => {
 				<span className="text-lg py-1 text-gray-500 dark:text-white-400">
 					Fees: ${fee}
 				</span>
+				<div className="flex items-center space-x-2 dark:text-yellow-500">
+					<span className="text-xl">
+						<StarRatings
+							rating={myRating}
+							starDimension="25px"
+							starSpacing="5px"
+							starRatedColor="orange"
+						/>
+						({reviewLength ? reviewLength : 0})
+					</span>
+				</div>
 				<div className="flex mt-4 space-x-3 md:mt-6">
 					<Link
 						to={`/services/${_id}`}
-						className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-					>
+						className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">
 						Details
 					</Link>
 				</div>

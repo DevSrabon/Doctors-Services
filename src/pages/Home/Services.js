@@ -25,13 +25,13 @@ const Services = () => {
 	return (
 		<div className="w-3/4 mx-auto">
 			<div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-				{services.map((service) => (
+				{services?.map((service) => (
 					<ServiceCard key={service._id} service={service}></ServiceCard>
 				))}
 			</div>
 			<div className="text-center my-5">
 				<div className="btn-group">
-					{[...Array(pages).keys()].map((number) => (
+					{[...Array(pages).keys()]?.map((number) => (
 						<button
 							key={number}
 							className={page === number ? 'btn btn-active' : 'btn'}
