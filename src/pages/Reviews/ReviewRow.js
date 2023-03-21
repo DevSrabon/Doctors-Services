@@ -35,7 +35,7 @@ const ReviewRow = ({ review, handleDelete, setRefetch }) => {
 			message: message,
 			reviewLength: reviewLength? reviewLength : 0,
 		};
-		fetch(`http://localhost:5000/updatereview/${_id}`, {
+		fetch(`https://doc-service-server.vercel.app/updatereview/${_id}`, {
 			method: "PUT",
 			headers: {
 				"content-type": "application/json",
@@ -45,9 +45,10 @@ const ReviewRow = ({ review, handleDelete, setRefetch }) => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data) {
-					setRefetch(true)
-					toast.success("updated Successfully ✅")
-			}});
+					setRefetch(true);
+					toast.success("updated Successfully ✅");
+				}
+			});
 	};
 	return (
 		<tr>

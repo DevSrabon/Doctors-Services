@@ -5,7 +5,7 @@ import AllServicesCards from './AllServicesCards';
 const AllServices = () => {
 	const [services, setServices] = useState([]);
 	useEffect(() => {
-		const url = `http://localhost:5000/services`;
+		const url = `https://doc-service-server.vercel.app/services`;
 
 		fetch(url)
 			.then((res) => res.json())

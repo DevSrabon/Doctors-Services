@@ -4,7 +4,7 @@ export const Statistic = () => {
     const [data, setData] = useState({})
     console.log("🚀 ~ file: Statistic.js:5 ~ Statistic ~ data:", data)
     useEffect(() => {
-        fetch("http://localhost:5000/totalDoc").then((res) =>
+        fetch("https://doc-service-server.vercel.app/totalDoc").then((res) =>
 					res.json().then((data) => setData(data))
 				);
     }, [])

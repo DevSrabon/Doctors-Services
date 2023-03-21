@@ -55,7 +55,7 @@ const Details = () => {
 			myRating: currentValue || 0,
 		};
 
-		fetch("http://localhost:5000/review", {
+		fetch("https://doc-service-server.vercel.app/review", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -70,7 +70,7 @@ const Details = () => {
 					form.reset();
 					setFetch(true);
 
-					fetch(`http://localhost:5000/updatereview/${_id}`, {
+					fetch(`https://doc-service-server.vercel.app/updatereview/${_id}`, {
 						method: "PUT",
 						headers: {
 							"content-type": "application/json",
@@ -78,13 +78,14 @@ const Details = () => {
 						body: JSON.stringify({
 							myRating: review.myRating,
 							message: review.message,
-							reviewLength: reviews.length+1}),
+							reviewLength: reviews.length + 1,
+						}),
 					})
 						.then((res) => res.json())
-						
+
 						.then((data) => {
 							if (data) {
-								setFetch2(true)
+								setFetch2(true);
 								toast.success("updated Successfully ✅");
 							}
 						});
@@ -93,11 +94,11 @@ const Details = () => {
 			.catch((er) => console.error(er));
 	};
 
-		useEffect(() => {
-			fetch(`http://localhost:5000/singlereview?id=${_id}`)
-				.then((res) => res.json())
-				.then((data) => setReviews(data));
-		}, [refetch, _id, refetch2]);
+	useEffect(() => {
+		fetch(`https://doc-service-server.vercel.app/singlereview?id=${_id}`)
+			.then((res) => res.json())
+			.then((data) => setReviews(data));
+	}, [refetch, _id, refetch2]);
 		useEffect(() => {
 			const starsReview = reviews?.map((stars) => stars.myRating);
 			if (starsReview.length > 0) {

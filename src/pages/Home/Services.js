@@ -10,7 +10,7 @@ const Services = () => {
 	const size = 3;
 	const [count, setCount] = useState(0);
 	useEffect(() => {
-		const url = `http://localhost:5000/services?page=${page}&size=${size}`;
+		const url = `https://doc-service-server.vercel.app/services?page=${page}&size=${size}`;
 		console.log(page, size);
 		fetch(url)
 			.then((res) => res.json())
