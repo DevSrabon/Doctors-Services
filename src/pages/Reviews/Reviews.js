@@ -22,7 +22,7 @@ const Reviews = () => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data);
+					
 					if (data.deletedCount > 0) {
 						toast.success("Deleted successfully");
 						const remaining = reviews.filter((rev) => rev._id !== id);

@@ -64,13 +64,13 @@ const Details = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				
 				if (data.acknowledged) {
 					toast.success("Review placed successfully");
 					form.reset();
 					setFetch(true);
 
-					fetch(`https://doc-service-server.vercel.app/updatereview/${_id}`, {
+					fetch(`https://doc-service-server.vercel.app/${_id}`, {
 						method: "PUT",
 						headers: {
 							"content-type": "application/json",
@@ -79,6 +79,7 @@ const Details = () => {
 							myRating: review.myRating,
 							message: review.message,
 							reviewLength: reviews.length + 1,
+							avgStars: avgStars,
 						}),
 					})
 						.then((res) => res.json())

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 export const Statistic = () => {
     const [data, setData] = useState({})
-    console.log("🚀 ~ file: Statistic.js:5 ~ Statistic ~ data:", data)
+    
     useEffect(() => {
         fetch("https://doc-service-server.vercel.app/totalDoc").then((res) =>
 					res.json().then((data) => setData(data))

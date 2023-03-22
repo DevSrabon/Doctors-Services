@@ -17,37 +17,37 @@ const Header = () => {
 					});
 			};
     const menuItems = (
-		<>
-			<li className="font-semibold">
-				<Link to="/">Home</Link>
-			</li>
-			<li className="font-semibold">
-				<Link to="/services">Services</Link>
-			</li>
-			<li className="font-semibold">
-				<Link to="/blog">Blog</Link>
-			</li>
-			{user?.email ? (
-				<>
-			<li className="font-semibold">
-				<Link to="/addservice">Add Service</Link>
-			</li>
-					<li className="font-semibold">
-			<li className="font-semibold">
-				<Link to="/reviews">My Reviews</Link>
-			</li>
-						<button onClick={handleLogOut} className="btn-ghost">
-							Sign Out
-						</button>
-					</li>
-				</>
-			) : (
+			<>
 				<li className="font-semibold">
-					<Link to="/login">Login</Link>
+					<Link to="/">Home</Link>
 				</li>
-			)}
-		</>
-	);
+				<li className="font-semibold">
+					<Link to="/services">Services</Link>
+				</li>
+				<li className="font-semibold">
+					<Link to="/blog">Blog</Link>
+				</li>
+				{user?.email ? (
+					<>
+						<li className="font-semibold">
+							<Link to="/addservice">Add Service</Link>
+						</li>
+						<li className="font-semibold">
+							<Link to="/reviews">My Reviews</Link>
+						</li>
+						<li className="font-semibold">
+							<button onClick={handleLogOut} className="btn-ghost">
+								Sign Out
+							</button>
+						</li>
+					</>
+				) : (
+					<li className="font-semibold">
+						<Link to="/login">Login</Link>
+					</li>
+				)}
+			</>
+		);
 
     return (
 			<div className="navbar h-20 mb-12 pt-12 bg-base-100">

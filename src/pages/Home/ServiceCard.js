@@ -13,7 +13,7 @@ const ServiceCard = ({ service }) => {
 		specialist,
 		degree,
 		description,
-		myRating,
+		avgStars,
 		institute,
 		reviewLength,
 	} = service;
@@ -62,7 +62,7 @@ const ServiceCard = ({ service }) => {
 				<div className="flex items-center space-x-2 dark:text-yellow-500">
 					<span className="text-xl">
 						<StarRatings
-							rating={myRating}
+							rating={avgStars}
 							starDimension="25px"
 							starSpacing="5px"
 							starRatedColor="orange"
@@ -74,7 +74,7 @@ const ServiceCard = ({ service }) => {
 					<Link
 						to={`/services/${_id}`}
 						className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">
-						Details
+						See Details
 					</Link>
 				</div>
 			</div>

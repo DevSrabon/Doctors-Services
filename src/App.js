@@ -3,10 +3,12 @@ import './App.css';
 import router from './Router/Routes/Routes';
 import 'react-photo-view/dist/react-photo-view.css';
 import { ToastContainer } from 'react-toastify';
+import ScrollToApp from './components/ScrollToApp/ScrollToApp';
 function App() {
 	return (
 		<div className="">
 			<RouterProvider router={router}></RouterProvider>
+			<ScrollToApp/>
 			<ToastContainer
 				position="top-center"
 				autoClose={1000}
