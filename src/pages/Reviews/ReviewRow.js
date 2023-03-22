@@ -16,13 +16,11 @@ const ReviewRow = ({ review, handleDelete, setRefetch }) => {
 		message,
 		myRating,
 		degree,
-		reviewLength
+		reviewLength,
+		avgStars,
 	} = review;
 	const [updateRating, setUpdateRating] = useState(review.myRating);
-	console.log(
-		"🚀 ~ file: ReviewRow.js:21 ~ ReviewRow ~ updateRating:",
-		updateRating
-	);
+	
 	const changeRating = (newRating) => {
 		setUpdateRating(newRating);
 	};
@@ -33,7 +31,8 @@ const ReviewRow = ({ review, handleDelete, setRefetch }) => {
 		const body = {
 			myRating: updateRating,
 			message: message,
-			reviewLength: reviewLength? reviewLength : 0,
+			reviewLength: reviewLength ? reviewLength : 0,
+			avgStars,
 		};
 		fetch(`https://doc-service-server.vercel.app/updatereview/${_id}`, {
 			method: "PUT",

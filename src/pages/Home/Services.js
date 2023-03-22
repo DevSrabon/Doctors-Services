@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import ServiceCard from './ServiceCard';
 const Services = () => {
 	const [services, setServices] = useState([]);
-	console.log(services);
+	
 	const [page, setPage] = useState(0);
 	const size = 3;
 	const [count, setCount] = useState(0);
 	useEffect(() => {
 		const url = `https://doc-service-server.vercel.app/services?page=${page}&size=${size}`;
-		console.log(page, size);
+		
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {

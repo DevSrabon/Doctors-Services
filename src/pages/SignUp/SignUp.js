@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { json, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { FaGoogle } from "react-icons/fa";
-  import { ToastContainer, toast } from 'react-toastify';
+  import { toast } from 'react-toastify';
 	import 'react-toastify/dist/ReactToastify.css';
 const SignUp = () => {
-	const { createUser, updateUserProfile, signInWithGoogle } = useContext(AuthContext);
+	const { createUser, updateUserProfile, user, setLoading } =
+		useContext(AuthContext);
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const from = location.state?.from?.pathname || "/";
+	if (user?.email) {
+		return navigate(from, { replace: true });
+	}
 		const saveUser = (name, email) => {
 			const user = { name, email };
 			fetch(`https://doc-service-server.vercel.app/users`, {
@@ -13,7 +20,7 @@ const SignUp = () => {
 				headers: {
 					"content-type": "application/json",
 				},
-				body: JSON.stringify(user),
+				body: JSON.stringify(user)
 			})
 				.then((res) => res.json())
 				.then((data) => {});
@@ -28,7 +35,7 @@ const SignUp = () => {
 		createUser(email, password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				
 				saveUser(user?.displayName, user?.email)
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);

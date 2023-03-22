@@ -10,7 +10,10 @@ const Login = () => {
 	const navigate = useNavigate();
 	const [error, setError] = useState("");
 	const from = location.state?.from?.pathname || '/';
-
+	const { user } = useContext(AuthContext)
+	if(user?.email){
+		return navigate(from, { replace: true })
+	}
 	const saveUser = (name, email) => {
 		const user = { name, email };
 		fetch(`https://doc-service-server.vercel.app/users`, {
@@ -32,7 +35,7 @@ const Login = () => {
 		login(email, password)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				
 				toast.success('Succesfull Login');
 				form.reset();
 				navigate(from, { replace: true });
