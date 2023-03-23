@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FcGoogle} from 'react-icons/fc'
 const Login = () => {
@@ -39,9 +39,11 @@ const Login = () => {
 				toast.success('Succesfull Login');
 				form.reset();
 				navigate(from, { replace: true });
+				setLoading(false)
 			})
 			.catch((err) => {
-				alert(err);
+				setError(err.message);
+				setLoading(false)
 			});
 	};
 	const handleGoogleLogin = () => {
@@ -102,6 +104,7 @@ const Login = () => {
 						required
 					/>
 				</div>
+				<small className='text-red-700'>{error}</small>
 				<button
 					type="submit"
 					className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -120,8 +123,9 @@ const Login = () => {
 				onClick={handleGoogleLogin}
 				disabled={loading}
 				className="btn btn-outline w-full max-w-sm">
-				<span><FcGoogle className='text-4xl'/></span>
-				
+				<span>
+					<FcGoogle className="text-4xl" />
+				</span>
 			</button>
 		</div>
 	);

@@ -23,6 +23,7 @@ const Details = () => {
 	const [refetch2, setFetch2] = useState(false);
 	const [avgStars, setAvgStars] = useState(0);
 	const [reviews, setReviews] = useState([]);
+	console.log("🚀 ~ file: Details.js:26 ~ Details ~ reviews:", reviews)
 	const {
 		_id,
 		img,
@@ -70,7 +71,7 @@ const Details = () => {
 					form.reset();
 					setFetch(true);
 
-					fetch(`https://doc-service-server.vercel.app/${_id}`, {
+					fetch(`https://doc-service-server.vercel.app/updatereview/${_id}`, {
 						method: "PUT",
 						headers: {
 							"content-type": "application/json",
